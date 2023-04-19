@@ -1,0 +1,49 @@
+@page "/profiles"
+
+<AuthorizeView>
+    <Authorized>
+        <div class="flex items-center h-full justify-center">
+            <div class="flex flex-col">
+                <h1 class="text-3xl md:text-6xl text-white text-center">
+                    Who is watching?
+                </h1>
+                <div class="flex items-center justify-center gap-8 mt-10">
+                    <div @onclick="NavigateUsingProfile">
+                        <div class="group flex-row w-44 mx-auto">
+                            <div class="
+                                w-44
+                                h-44
+                                rounded-md
+                                flex
+                                items-center
+                                justify-center
+                                border-2
+                                border-transparent
+                                group-hover:cursor-pointer
+                                group-hover:border-white
+                                overflow-hidden">
+                                <img src="/images/default-blue.png" alt="Profile" />
+                            </div>
+                            <div class="mt-4 text-gray-400 text-2xl text-center group-hover:text-white">
+                                Name
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        @{ NavigationManager.NavigateTo("/auth"); }
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    [Inject]
+    public NavigationManager NavigationManager { get;set; } = null!;
+
+    private void NavigateUsingProfile()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+}

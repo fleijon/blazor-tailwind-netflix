@@ -1,0 +1,53 @@
+@using blazor_tailwind_netflix.Client.Services
+
+@page "/watch/{movieId:guid}"
+
+<div class="h-screen w-screen bg-black group">
+    <nav class="
+        bg-opacity-70
+        fixed
+        w-full
+        p-4
+        z-10
+        flex
+        flex-row
+        items-center
+        gap-8
+        bg-black">
+        <button @onclick="NavigateHome" class="">
+            <ArrowLeftIcon class="text-white hover:opacity-80 transition w-4 md:w-10" />
+        </button>
+        <p class="text-white text-1xl md:text-3xl font-bold">
+          <span class="font-light">Watching:</span> @movie?.Title
+        </p>
+    </nav>
+    <video controls autoPlay class="h-full w-full" src=@movie?.VideoUrl ></video>
+</div>
+
+@code
+{
+    [Inject]
+    public MovieStore.IMovies Movies { get;set; } = null!;
+    [Inject]
+    public NavigationManager NavigationManager { get;set; } = null!;
+
+    [Parameter]
+    public Guid? MovieId { get;set; }
+    
+    private MovieStore.Movie? movie;
+
+    private void NavigateHome()
+    {
+        NavigationManager.NavigateTo("/");
+    }
+
+    protected override void OnInitialized()
+    {
+        if(!MovieId.HasValue)
+            return;
+        
+        movie = Movies.GetMovie(MovieId.Value);
+
+        StateHasChanged();
+    }
+}

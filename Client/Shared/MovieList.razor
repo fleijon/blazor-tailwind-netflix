@@ -1,0 +1,24 @@
+@using blazor_tailwind_netflix.Client.Services
+@if(Movies?.Any() ?? false)
+{
+    <div class="px-4 md:px-12 mt-4  space-y-8">
+        <div>
+            <p class="text-white text-md md:text-xl lg:text-2xl font-semibold mb-4">
+                @Title
+            </p>
+            <div class="grid grid-cols-4 gap-2">
+                @foreach (var item in Movies)
+                {
+                    <MovieCard Movie=@(item) />
+                }
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string Title { get;set; } = string.Empty;
+    [Parameter]
+    public IReadOnlyList<MovieStore.Movie> Movies { get;set; } = new List<MovieStore.Movie>();
+}

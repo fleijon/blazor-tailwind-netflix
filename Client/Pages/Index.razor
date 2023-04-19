@@ -1,0 +1,17 @@
+﻿@using blazor_tailwind_netflix.Client.Services
+
+@page "/"
+
+<AuthorizeView>
+    <Authorized>
+        <div>
+            <InfoModal />
+            <Navbar />
+            <Billboard />
+            <MovieListings />
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        @{ NavigationManager.NavigateTo("/auth"); }
+    </NotAuthorized>
+</AuthorizeView>

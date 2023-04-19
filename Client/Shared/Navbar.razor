@@ -1,0 +1,51 @@
+<nav class="w-full fixed z-40">
+    <div class="px-4 md:px-16 py-6 flex flex-row items-center transition duration-500 bg-zinc-900 bg-opacity-70 ">
+        <img class="h-4 md:h-7" src="/images/logo.png" alt="Logo"/>
+        <div class="flex-row ml-8 gap-7 hidden lg:flex">
+            <NavbarItem Label="Home" />
+            <NavbarItem Label="Series" />
+            <NavbarItem Label="Films" />
+            <NavbarItem Label="New & Popular" />
+            <NavbarItem Label="My List" />
+            <NavbarItem Label="Browse by languages" />
+        </div>
+     <div class="lg:hidden flex flex-row items-center gap-2 ml-8 cursor-pointer relative">
+            <p class="text-white text-sm">
+                Browse
+            </p>
+            <ChevronDownIcon class="text-white transition" />
+        </div>
+        <div class="flex flex-row ml-auto gap-7 items-center">
+            <div class="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                <SearchIcon />
+            </div>
+            <div class="text-gray-200 hover:text-gray-300 cursor-pointer transition">
+                <BellOutlinedIcon />
+            </div>
+            <div @onclick="ToggleAccountMenu" class="flex flex-row items-center gap-2 cursor-pointer relative">
+                <div class="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
+                    <img src="images/default-blue.png" alt="" />
+                </div>
+                <ChevronDownIcon class="@rotationCss" />
+                @if(accountMenuIsVisible)
+                {
+                    <AccountMenu />
+                }
+            </div>
+        </div>
+    </div>
+</nav>
+
+@code {
+
+    [Inject]
+    public IJSRuntime JSRuntime { get;set; } = null!;
+
+    private bool accountMenuIsVisible = false;
+    private string rotationCss => accountMenuIsVisible ? "rotate-180 transition duration-300" : "rotate-0 transition duration-300";
+
+    private void ToggleAccountMenu()
+    {
+        accountMenuIsVisible = !accountMenuIsVisible;
+    }
+}

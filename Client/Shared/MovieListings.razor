@@ -1,0 +1,4 @@
+<div>
+    <MovieList Title="Trending Now" Movies=@(Movies.GetAllMovies().Take(4).ToList()) />
+    <MovieList Title="My List" Movies=@FavoriteMovies />
+</div>

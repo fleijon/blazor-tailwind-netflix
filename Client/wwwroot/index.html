@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>blazor-tailwind-netflix</title>
+    <base href="/" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link href="app.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="app">
+        <div class="flex justify-center">
+            <div class="flex flex-col m-[20%] items-center">
+                <div class="text-white md:text-lg lg:text-2xl">
+                    Loading application... 
+                </div>
+                <div>
+                    <div class="linear-progress" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="blazor-error-ui">
+        An undhandled error as occured.
+        <a href="" class="reload" >Reload</a>>
+        <a class="dismiss" >x</a>>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        function getScrollY() {
+            return window.scrollY;
+        }
+    </script>
+</body>
+
+</html>

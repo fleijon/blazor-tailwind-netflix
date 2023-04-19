@@ -1,0 +1,90 @@
+@using blazor_tailwind_netflix.Client.Services
+@using blazor_tailwind_netflix.Client.Extensions
+
+@if(isVisible)
+{
+    <div class="
+        z-50
+        bg-black
+        bg-opacity-80
+        flex
+        justify-center
+        items-center
+        overflow-x-hidden
+        overflow-y-auto
+        fixed
+        inset-0">
+
+        <div class="
+            relative
+            w-auto
+            mx-auto
+            max-w-3xl
+            rounded-md
+            overflow-hidden">
+            <div class="
+                relative
+                flex-auto
+                bg-zinc-900
+                drop-shadow-md">
+                <div class="relative h-96">
+                    <video 
+                        class="
+                            w-full
+                            brightness-[60%]
+                            object-cover
+                            h-full"
+                        autoplay
+                        volume="0"
+                        muted
+                        loop
+                        poster=@movie?.ThumbnailUrl src=@movie?.VideoUrl>
+                    </video>
+                    <div 
+                        @onclick="Close"
+                        class="
+                        cursor-pointer
+                        absolute
+                        top-3
+                        right-3
+                        h-10
+                        w-10
+                        rounded-full
+                        bg-black
+                        bg-opacity-70
+                        flex
+                        items-center
+                        justify-center">
+                        <CloseIcon width="20" height="20" />
+                    </div>
+                    <div class="absolute bottom-[10%] left-10">
+                        <p class="text-white text-3xl md:text-4xl h-full lg:text-5xl font-bold mb-8">
+                            @movie?.Title
+                        </p>
+                        <div class="flex flex-row gap-4 items-center">
+                            <PlayButton MovieId=@movie?.Id />
+                            <FavoriteButton MovieId=@movie?.Id UserId=@(Guid.Empty) />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-12 py-8">
+                    <div class="flex flex-row items-center gap-4 mb-8">
+                        <p class="text-green-400 font-semibold text-lg">
+                            New
+                        </p>
+                        <p class="text-white text-lg">
+                            @movie?.Duration.FormatDurationToMinutes()
+                        </p>
+                        <p class="text-white text-lg">
+                            @movie?.Genre
+                        </p>
+                    </div>
+                    <p class="text-white text-lg">
+                        @movie?.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

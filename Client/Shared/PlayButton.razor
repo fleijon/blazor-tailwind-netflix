@@ -1,0 +1,34 @@
+<button @onclick="Play"
+    class="
+        bg-white
+        rounded-md
+        py-1 md:py-2
+        px-2 md:px-4
+        w-auto
+        text-xs lg:text-lg
+        font-semibold
+        flex
+        flex-row
+        items-center
+        hover:bg-neutral-500
+        transition
+    ">
+    <PlayIcon Fill="gray-900" class="" width="25" heigth="25" />
+    Play
+</button>
+
+@code {
+
+    [Inject]
+    public NavigationManager NavigationManager { get;set; } = null!;
+    [Parameter]
+    public Guid? MovieId { get;set; }
+
+    private void Play()
+    {
+        if(MovieId is null)
+            return;
+
+        NavigationManager.NavigateTo($"/watch/{MovieId}");
+    }
+}

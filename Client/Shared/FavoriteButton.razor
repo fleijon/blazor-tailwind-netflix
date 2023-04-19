@@ -1,0 +1,20 @@
+<div
+    @onclick="AddOrRemoveFromFavorites"
+    class="
+        cursor-pointer
+        w-6 lg:w-10
+        h-6 lg:h-10
+        flex
+        justify-center
+        items-center
+        "
+        >
+    @if(IsFavorite)
+    {
+        <CheckIcon width="40" height="40"/>
+    }
+    else
+    {
+        <PlusIcon width="40" height="40" />
+    }
+</div>
