@@ -1,12 +1,13 @@
 @using blazor_tailwind_netflix.Client.Services
 @using blazor_tailwind_netflix.Client.Extensions
 
-@if(isVisible)
+@if(componentIsVisible)
 {
     <div class="
         z-50
-        bg-black
-        bg-opacity-80
+        transition
+        duration-300
+        bg-black/80
         flex
         justify-center
         items-center
@@ -23,6 +24,9 @@
             rounded-md
             overflow-hidden">
             <div class="
+                transform
+                @scale
+                duration-300
                 relative
                 flex-auto
                 bg-zinc-900
@@ -87,4 +91,9 @@
             </div>
         </div>
     </div>
+}
+
+@code {
+    private string scale => isVisible ? "scale-100" : "scale-0";
+
 }

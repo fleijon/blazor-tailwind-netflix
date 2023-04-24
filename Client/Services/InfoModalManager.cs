@@ -13,7 +13,6 @@ public class InfoModalManager : IInfoModalManager
 {
     public event EventHandler<Guid>? OnOpen;
     public event EventHandler? OnClosed;
-
     public void Close()
     {
         OnClosed?.Invoke(this, EventArgs.Empty);

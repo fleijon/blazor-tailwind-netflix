@@ -11,6 +11,7 @@ public partial class InfoModal : IDisposable
     [Inject]
     public MovieStore.IMovies MovieStore { get;set; } = null!;
 
+    private bool componentIsVisible = false;
     private bool isVisible = false;
     private MovieStore.Movie? movie;
 
@@ -22,12 +23,14 @@ public partial class InfoModal : IDisposable
 
     private void OnClosed(object? sender, EventArgs e)
     {
+        componentIsVisible = false;
         movie = null;
-        isVisible = false;
     }
 
-    private void Close()
+    private async Task Close()
     {
+        isVisible = false;
+        await Task.Delay(300);
         InfoModalManager.Close();
     }
 
@@ -35,6 +38,8 @@ public partial class InfoModal : IDisposable
     {
         movie = MovieStore.GetMovie(e);
         isVisible = true;
+        componentIsVisible = true;
+
         StateHasChanged();
     }
 
@@ -42,5 +47,7 @@ public partial class InfoModal : IDisposable
     {
         InfoModalManager.OnOpen -= OnOpen;
         InfoModalManager.OnClosed -= OnClosed;
+
+        GC.SuppressFinalize(this);
     }
 }
